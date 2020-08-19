@@ -1,10 +1,8 @@
 # Projeto Integrador IV 
 
 ## 1º Parte da avaliação
-
- ### Código Python:
- 
-~~~
+* Elaborando o código:
+~~~phython
 import paho.mqtt.publish as publish
 import time
 from time import localtime, strftime
@@ -42,8 +40,7 @@ while True:
 		time.sleep(sleep)
 ~~~
       
-      
-       ## Valores disponiveis No thingspeak:
-      https://thingspeak.com/channels/1056037
+   *Visualização dos dados:   
+      <https://thingspeak.com/channels/1056037>
       
       
