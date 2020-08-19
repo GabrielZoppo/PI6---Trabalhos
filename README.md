@@ -41,7 +41,6 @@ while True:
 		time.sleep(sleep)
 ~~~
       
-   ## Visualização dos dados:   
-      [Dados no Thingspeak](https://thingspeak.com/channels/1056037)
-      
+   ## Visualização dos dados:    
+      * [Dados no Thingspeak](https://thingspeak.com/channels/1056037)
       
