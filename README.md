@@ -1,10 +1,12 @@
 # Projeto Integrador IV 
 
 ## 1º Parte da avaliação
-*Métricas Escolhidas:
-Uso  de CPU:
-Uso de Mémoria:
-Uso de Disco:
+* Métricas Escolhidas:
+
+ * Uso  de CPU:
+ * Uso de Mémoria:
+ * Uso de Disco:
+
 * Elaborando o código:
 ~~~phython
 import paho.mqtt.publish as publish
