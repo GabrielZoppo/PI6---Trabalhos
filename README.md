@@ -28,7 +28,7 @@ while True:
 		print("Uso de memoria :", memory_use)
 		print(strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 
-		params = "field1="+str(cpu_percent)+"&field2="+str(memory_use)+"&field3="+str(disk_use)
+		params = "field1="+str(cpu_percent)+"&field2="+str(memory_use.percent)+"&field3="+str(disk_use.percent)
 		publish.single(topic,payload=params,hostname=SERVER)
 
 	except:
