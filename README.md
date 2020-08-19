@@ -40,7 +40,7 @@ while True:
 		time.sleep(sleep)
 ~~~
       
-   *Visualização dos dados:   
+   * Visualização dos dados:   
       <https://thingspeak.com/channels/1056037>
       
       
