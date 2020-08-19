@@ -42,6 +42,6 @@ while True:
 ~~~
       
    ## Visualização dos dados:   
-      <https://thingspeak.com/channels/1056037>
+      [Dados no Thingspeak](https://thingspeak.com/channels/1056037)
       
       
