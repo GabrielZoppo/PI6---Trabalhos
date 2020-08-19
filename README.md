@@ -14,7 +14,6 @@ SERVER = "mqtt.thingspeak.com"
 CHANNEL_ID = "1056037"
 WRITE_API_KEY = "O6LDX4RKVBD7X4OY"
 topic = "channels/" + CHANNEL_ID + "/publish/" + WRITE_API_KEY
-ser = serial.Serial('/dev/ttyUSB0', 9600)
 
 sleep = 59 # Intervalo em segundos de cada postagem
 
