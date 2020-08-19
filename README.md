@@ -6,31 +6,29 @@
 import paho.mqtt.publish as publish
 import time
 from time import localtime, strftime
-import serial
 import psutil 
 import subprocess 
 
 SERVER = "mqtt.thingspeak.com"
 CHANNEL_ID = "1056037"
-WRITE_API_KEY = "O6LDX4RKVBD7X4OY"
+WRITE_API_KEY = "70Q9QHDYG3THOLWX"
 topic = "channels/" + CHANNEL_ID + "/publish/" + WRITE_API_KEY
 
-sleep = 59 # Intervalo em segundos de cada postagem
-
-
+sleep = 59
 while True:
     # Leitura dos sensores
 	cpu_percent = psutil.cpu_percent(interval=1)
-    tr_ssd = psutil.disk_usage('/')
-	str_hd = psutil.disk_usage('/')
+	memory_use = psutil.virtual_memory()
+	disk_use = psutil.disk_usage('/')
 	
 	try:
 		# Printa os valores enviados, data e status da conexão
-		print("CPU %:", var)
-
+		print("CPU %:", cpu_percent)
+		print("Uso de Disco :", disk_use)
+		print("Uso de memoria :", memory_use)
 		print(strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 
-		params = "field1="+str(cpu_percent)+"&field2="+str(str_ssd.used)+"&field3="+str(str_hd.used)
+		params = "field1="+str(cpu_percent)+"&field2="+str(memory_use)+"&field3="+str(disk_use)
 		publish.single(topic,payload=params,hostname=SERVER)
 
 	except:
