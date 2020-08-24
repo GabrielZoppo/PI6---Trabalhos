@@ -43,4 +43,20 @@ while True:
       
    ## Visualização dos dados:    
    * [Thingspeak](https://thingspeak.com/channels/1056037)
+   
+  ## Organização dos dados:
+  * Jogando num emulador e ouvindo música no youtube:
+  ![Tempo 1:](https://media.discordapp.net/attachments/738492246583803997/747509523819921528/foto_1_trabalho_PI_VI.png?width=1024&height=587)
+  
+  * nada aberto:
+  ![Tempo 2:]()
+  
+  * Fazendo live e jogando video game:
+  [Tempo 3:]()
+  
+  * Assistindo a aula:
+  [Tempo 4:]()
+  
+  * Estudando
+  [Tempo 5:]()
       
