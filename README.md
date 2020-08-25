@@ -52,11 +52,11 @@ while True:
   ![Tempo 2:]()
   
   * Fazendo live e jogando video game:
-  [Tempo 3:](https://media.discordapp.net/attachments/738492246583803997/747629081348014130/foto_2_trabalho_PI_VI.png?width=956&height=586)
+  ![Tempo 3:](https://media.discordapp.net/attachments/738492246583803997/747629081348014130/foto_2_trabalho_PI_VI.png?width=956&height=586)
   
   * Assistindo a aula:
-  [Tempo 4:]()
+  ![Tempo 4:]()
   
   * Estudando
-  [Tempo 5:]()
+  ![Tempo 5:]()
       
