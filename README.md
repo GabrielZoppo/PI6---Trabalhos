@@ -55,7 +55,7 @@ while True:
   ![Tempo 3:](https://media.discordapp.net/attachments/738492246583803997/747629081348014130/foto_2_trabalho_PI_VI.png?width=956&height=586)
   
   * Assistindo a aula:
-  ![Tempo 4:]()
+  ![Tempo 4:](https://media.discordapp.net/attachments/738492246583803997/747968586693345370/foto_3_trabalho_PI_VI.png?width=1034&height=586)
   
   * Estudando
   ![Tempo 5:]()
