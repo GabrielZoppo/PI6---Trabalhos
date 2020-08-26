@@ -58,5 +58,5 @@ while True:
   ![Tempo 4:](https://media.discordapp.net/attachments/738492246583803997/747968586693345370/foto_3_trabalho_PI_VI.png?width=1034&height=586)
   
   * Estudando
-  ![Tempo 5:]()
+  ![Tempo 5:](https://media.discordapp.net/attachments/738492246583803997/748203686852821032/foto_4_trabalho_PI_VI.png?width=954&height=587)
       
