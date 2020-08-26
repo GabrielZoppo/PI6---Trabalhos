@@ -49,7 +49,7 @@ while True:
   ![Tempo 1:](https://media.discordapp.net/attachments/738492246583803997/747509523819921528/foto_1_trabalho_PI_VI.png?width=1024&height=587)
   
   * nada aberto:
-  ![Tempo 2:]()
+  ![Tempo 2:](https://media.discordapp.net/attachments/738492246583803997/748241872287170681/foto_5_trabalho_PI_VI.png?width=906&height=586)
   
   * Fazendo live e jogando video game:
   ![Tempo 3:](https://media.discordapp.net/attachments/738492246583803997/747629081348014130/foto_2_trabalho_PI_VI.png?width=956&height=586)
