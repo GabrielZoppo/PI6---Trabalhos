@@ -43,7 +43,7 @@ print("Uso de memoria : ", mem_used, "GB")
 
 
 #instruções  de Criação das tabelas MYSQL
-#cursor.execute("create table analises(cpu_percent float(6), memory_use float(6), disk_use float(6))")
+cursor.execute("create table analises(cpu_percent float(6), memory_use float(6), disk_use float(6))")
 
 #instruções  de inserção MYSQL
 insere = "insert into analise(cpu_percent, disk_use, memory_use)values(%s, %s, %s)"
