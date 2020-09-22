@@ -47,23 +47,7 @@ while True:
       
    ## Visualização dos dados:    
    * [Thingspeak](https://thingspeak.com/channels/1056037)
-   
-  ## Organização dos dados:
-  * Jogando num emulador e ouvindo música no youtube:
-  ![Tempo 1:](https://media.discordapp.net/attachments/738492246583803997/747509523819921528/foto_1_trabalho_PI_VI.png?width=1024&height=587)
-  
-  * Ouvindo música:
-  ![Tempo 2:](https://media.discordapp.net/attachments/738492246583803997/748241872287170681/foto_5_trabalho_PI_VI.png?width=906&height=586)
-  
-  * Fazendo live e jogando video game:
-  ![Tempo 3:](https://media.discordapp.net/attachments/738492246583803997/747629081348014130/foto_2_trabalho_PI_VI.png?width=956&height=586)
-  
-  * Assistindo a aula:
-  ![Tempo 4:](https://media.discordapp.net/attachments/738492246583803997/747968586693345370/foto_3_trabalho_PI_VI.png?width=1034&height=586)
-  
-  * Estudando
-  ![Tempo 5:](https://media.discordapp.net/attachments/738492246583803997/748203686852821032/foto_4_trabalho_PI_VI.png?width=954&height=587)
-      
+     
   ## Código para entrega parcial
   ~~~python
   #importando a biblioteca PyMySQL e psutil
