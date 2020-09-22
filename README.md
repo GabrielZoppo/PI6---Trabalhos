@@ -64,7 +64,7 @@ while True:
   * Estudando
   ![Tempo 5:](https://media.discordapp.net/attachments/738492246583803997/748203686852821032/foto_4_trabalho_PI_VI.png?width=954&height=587)
       
-  ## Código misturando banco de dados e captura de dados do sistema
+  ## Código para entrega parcial
   ~~~python
   #importando a biblioteca PyMySQL e psutil
 from typing import Any, Union
