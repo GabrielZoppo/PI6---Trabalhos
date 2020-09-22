@@ -50,4 +50,10 @@ insere = "insert into analise(cpu_percent, disk_use, memory_use)values(%s, %s, %
 valor = (cpu, disco_used, mem_used)
 cursor.execute(insere,valor)
 conexao.commit()
+
+#intruções de seleção MYSQL
+cursor.execute("SELECT * FROM trabalho.analise where cpu_percent between 30 and 60 order by cpu_percent")
+resultado = cursor.fetchall()
+for linha in resultado :
+print(linha)
   ~~~
