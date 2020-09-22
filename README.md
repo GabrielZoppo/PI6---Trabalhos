@@ -5,7 +5,7 @@
  * Uso de Mémoria 	
  * Uso de Disco
 
-## Elaborando o código:
+## Código para monitoriamento de dados e envio para thingspeak:
 ~~~phython
 # importação de bibliotecas
 import paho.mqtt.publish as publish
