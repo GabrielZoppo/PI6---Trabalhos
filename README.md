@@ -14,6 +14,7 @@ import psutil
 import pymysql
 from pymysql.cursors import Cursor
 
+#Criando a conexão com o servidor
 conexao = pymysql.connect(
     host = 'localhost',
     user = 'root',
@@ -22,6 +23,7 @@ conexao = pymysql.connect(
 )
 cursor = conexao.cursor()
 sleep = 59
+
 while True:
     # Leitura dos sensores
     cpu = psutil.cpu_percent(interval=1)
