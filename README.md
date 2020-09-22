@@ -43,6 +43,7 @@ while True:
         print("Uso de memoria :", mem_used, "GB")
         print(strftime("%a, %d %b %Y %H:%M:%S", localtime()))
 
+        #instruções  de inserção MYSQL
         insere = "insert into analise(cpu_percent, memory_use, disk_use)values(%s, %s, %s)"
         valor = (cpu, disco_used, mem_used)
         cursor.execute(insere, valor)
