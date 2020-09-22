@@ -105,7 +105,7 @@ print("Uso de memoria : ", mem_used, "GB")
 #cursor.execute("create table analises(cpu_percent float(6), memory_use float(6), disk_use float(6))")
 
 #instruções  de inserção MYSQL
-insere = "insert into analise(cpu_percent, memory_use, disk_use)values(%s, %s, %s)"
+insere = "insert into analise(cpu_percent, disk_use, memory_use)values(%s, %s, %s)"
 valor = (cpu, disco_used, mem_used)
 cursor.execute(insere,valor)
 conexao.commit()
