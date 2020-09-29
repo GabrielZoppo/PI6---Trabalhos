@@ -43,6 +43,5 @@ while True:
       conexao.commit()
 
   except:
-      print("connection failed")  # Em caso de erro de conexão
 
       time.sleep(sleep)
