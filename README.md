@@ -1,11 +1,13 @@
 # Projeto Integrador IV 
 
-## Métricas Escolhidas: 
+## Primeira Etapa:
+
+### Métricas Escolhidas: 
  * Uso  de CPU 	
  * Uso de Mémoria 	
  * Uso de Disco
 
-  ## Código para entrega parcial
+  ### Código para entrega parcial
   ~~~python
   # importação de bibliotecas
 import time
@@ -55,8 +57,9 @@ while True:
         
         time.sleep(sleep)
   ~~~
-  
-  ## Rótina de monitoramento do Sistema:
+  ## 2º Etapa do Projeto:
+  ### Código do monitoramento e do banco:
+  * Rótina de monitoramento do Sistema:
   ~~~Python
 from typing import Any, Union
 import schedule
@@ -146,7 +149,7 @@ while 1:
     time.sleep(600)
   ~~~
 
-## Código de criação da tabela Disco:
+* Código de criação da tabela Disco:
 ~~~SQL
 create table disco(
 disco_C_usado float,
@@ -157,7 +160,7 @@ data timestamp
 );
 ~~~
 
-## Código de criação da tabela Memória:
+* Código de criação da tabela Memória:
 ~~~SQL
 create table memoria(
 memoria_usado float,
@@ -166,7 +169,7 @@ data timestamp
 );
 ~~~
 
-## Código de criação da tabela CPU:
+* Código de criação da tabela CPU:
 ~~~SQL
 create table cpu(
 porcentagem float,
