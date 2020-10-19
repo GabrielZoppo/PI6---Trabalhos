@@ -145,3 +145,32 @@ while 1:
     schedule.run_pending()
     time.sleep(600)
   ~~~
+
+## Código de criação da tabela Disco:
+~~~SQL
+create table disco(
+disco_C_usado float,
+disco_C_livre float,
+disco_D_usado float,
+disco_D_livre float,
+data timestamp
+);
+~~~
+
+## Código de criação da tabela Memória:
+~~~SQL
+create table memoria(
+memoria_usado float,
+memoria_disponivel float,
+data timestamp
+);
+~~~
+
+## Código de criação da tabela CPU:
+~~~SQL
+create table cpu(
+porcentagem float,
+frequencia float,
+data timestamp
+);
+~~~
