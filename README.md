@@ -60,6 +60,7 @@ while True:
   ~~~Python
 from typing import Any, Union
 import schedule
+from schedule import *
 import time
 from time import strftime, localtime #biblioteca responsável em colocar os dados da data e hora do sistema em timestamp para ser usado no banco
 import pymysql #biblioteca utilizada para comunicação entre python e mysql
@@ -138,7 +139,7 @@ def Monitoramento():
     conexao.commit()
 
 #programar em quanto tempo ele executa o código novamente
-schedule.every().hour.do(Monitoramento)
+schedule.every(3600).seconds.do(Monitoramento)
 
 while 1:
     schedule.run_pending()
