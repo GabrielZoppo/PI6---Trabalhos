@@ -59,7 +59,7 @@ while True:
   ## Código python básico:
   ~~~Python
 from typing import Any, Union
-from time import strftime, localtime #biblioteca responsável em colocar os dados da data e hora do sistema em timestamp para ser usado no banco
+from time import strftime, localtime #biblioteca responsável em colocar os dados da data e hora do sistema em timestamp
 import pymysql #biblioteca utilizada para comunicação entre python e mysql
 import psutil #biblioteca responsável pela coleta de dados do sistema como cpu,memoria e disco
 from pymysql.cursors import Cursor # importando cursor da biblioteca pymysql,este sendo necessário para execução dos comando mysql
