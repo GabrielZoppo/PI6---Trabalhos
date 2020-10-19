@@ -60,13 +60,11 @@ while True:
   ~~~Python
   from typing import Any, Union
 
-from time import strftime, localtime #biblioteca responsável em colocar os dados da data e hora do sistema
-# e passar para timestamp para ser utilizado no bando de dados
+from time import strftime, localtime #biblioteca responsável em colocar os dados da data e hora do sistema em timestamp para ser usado no banco
 import pymysql #biblioteca utilizada para comunicação entre python e mysql
 import psutil #biblioteca responsável pela coleta de dados do sistema como cpu,memoria e disco
+from pymysql.cursors import Cursor
 
-
-from pymysql.cursors import Cursor # importando cursor da biblioteca pymysql,este sendo necessário para execução dos comando mysql no python
 #declarando as informações necessárias para a conexão com o banco de dados
 conexao = pymysql.connect(
     host = 'localhost',
@@ -90,7 +88,7 @@ mem = psutil.virtual_memory()
 #leitura de data e hora:
 datahora = strftime("%Y-%m-%d %H:%M:%S", localtime())
 
-#tratamento dos dados para as devidas medidas:
+#tratamento dos dados para ser colocado no banco:
 mem_used      = float(round(mem.used/1000000000,2))
 mem_available = float(round(mem.available/1000000000,2))
 discoC_used   = float(round(discoC.used/1000000000,2))
@@ -128,11 +126,15 @@ print("Disponivel : ", mem_available, "GB")
 inserecpu = "insert into cpu(porcentagem, frequencia, data)values(%s, %s, %s)"
 inseremem = "insert into memoria(memoria_usado, memoria_livre, data)values(%s, %s, %s)"
 inseredis = "insert into disco(disco_C_usado, disco_C_livre, disco_D_usado, disco_D_livre, data)values(%s, %s, %s, %s,%s)"
+
 valorcpu = (cpu_p, cpu_f, datahora)
 valormem = (mem_used,mem_available , datahora)
 valordis = (discoC_used, discoC_free, discoD_used,discoD_free, datahora)
+
 cursor.execute(inserecpu, valorcpu)
 cursor.execute(inseremem, valormem)
 cursor.execute(inseredis, valordis)
+
+#Atualizar o banco com os dados novos
 conexao.commit()
   ~~~
