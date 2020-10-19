@@ -57,7 +57,7 @@ while True:
         
         time.sleep(sleep)
   ~~~
-  ## 2º Etapa do Projeto:
+  ## Segunda Etapa:
   ### Código do monitoramento e do banco:
   * Rótina de monitoramento do Sistema:
   ~~~Python
