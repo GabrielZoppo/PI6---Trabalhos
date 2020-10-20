@@ -63,7 +63,6 @@ while True:
   ~~~Python
 from typing import Any, Union
 import schedule
-from schedule import *
 import time
 from time import strftime, localtime #biblioteca responsável em colocar os dados da data e hora do sistema em timestamp para ser usado no banco
 import pymysql #biblioteca utilizada para comunicação entre python e mysql
@@ -129,17 +128,18 @@ def Monitoramento():
     print("Usada : ", mem_used, "GB")
     print("Disponivel : ", mem_available, "GB")
 
-    #inserção dos dados no Banco de Dados
+    # inserção dos dados no Banco de Dados
     inserecpu = "insert into cpu(porcentagem, frequencia, data)values(%s, %s, %s)"
-    inseremem = "insert into memoria(memoria_usado, memoria_livre, data)values(%s, %s, %s)"
+    inseremem = "insert into memoria(memoria_usado, memoria_disponivel, data)values(%s, %s, %s)"
     inseredis = "insert into disco(disco_C_usado, disco_C_livre, disco_D_usado, disco_D_livre, data)values(%s, %s, %s, %s,%s)"
+
     valorcpu = (cpu_p, cpu_f, datahora)
-    valormem = (mem_used,mem_available , datahora)
-    valordis = (discoC_used, discoC_free, discoD_used,discoD_free, datahora)
+    valormem = (mem_used, mem_available, datahora)
+    valordis = (discoC_used, discoC_free, discoD_used, discoD_free, datahora)
+
     cursor.execute(inserecpu, valorcpu)
     cursor.execute(inseremem, valormem)
     cursor.execute(inseredis, valordis)
-    conexao.commit()
 
 #programar em quanto tempo ele executa o código novamente
 schedule.every(3600).seconds.do(Monitoramento)
