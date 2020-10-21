@@ -94,6 +94,9 @@ def Monitoramento():
     #leitura de data e hora:
     datahora = strftime("%Y-%m-%d %H:%M:%S", localtime())
 
+    #definindo usuário
+    id = 1
+
     #tratamento dos dados para as devidas medidas:
     mem_used      = float(round(mem.used/1000000000,2))
     mem_available = float(round(mem.available/1000000000,2))
@@ -127,26 +130,28 @@ def Monitoramento():
     print("Memoria:")
     print("Usada : ", mem_used, "GB")
     print("Disponivel : ", mem_available, "GB")
+    print()
 
     # inserção dos dados no Banco de Dados
-    inserecpu = "insert into cpu(porcentagem, frequencia, data)values(%s, %s, %s)"
-    inseremem = "insert into memoria(memoria_usado, memoria_disponivel, data)values(%s, %s, %s)"
-    inseredis = "insert into disco(disco_C_usado, disco_C_livre, disco_D_usado, disco_D_livre, data)values(%s, %s, %s, %s,%s)"
+    inserecpu = "insert into cpu(id, porcentagem, frequencia, data)values(%s, %s, %s, %s)"
+    inseremem = "insert into memoria(id, memoria_usado, memoria_disponivel, data)values(%s, %s, %s, %s)"
+    inseredis = "insert into disco(id, disco_C_usado, disco_C_livre, disco_D_usado, disco_D_livre, data)values(%s, %s, %s, %s,%s, %s)"
 
-    valorcpu = (cpu_p, cpu_f, datahora)
-    valormem = (mem_used, mem_available, datahora)
-    valordis = (discoC_used, discoC_free, discoD_used, discoD_free, datahora)
+    valorcpu = (id, cpu_p, cpu_f, datahora)
+    valormem = (id, mem_used, mem_available, datahora)
+    valordis = (id, discoC_used, discoC_free, discoD_used, discoD_free, datahora)
 
     cursor.execute(inserecpu, valorcpu)
     cursor.execute(inseremem, valormem)
     cursor.execute(inseredis, valordis)
 
+    conexao.commit()
 #programar em quanto tempo ele executa o código novamente
 schedule.every(3600).seconds.do(Monitoramento)
 
 while 1:
     schedule.run_pending()
-    time.sleep(600)
+    time.sleep(1)
   ~~~
 
 * Código de criação das tabelas:
