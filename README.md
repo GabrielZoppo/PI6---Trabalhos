@@ -169,7 +169,6 @@ id int,
 porcentagem float,
 frequencia float,
 data timestamp,
-primary key(id),
 foreign key (id) references usuarios(id)
 );
 
@@ -179,7 +178,6 @@ id int,
 memoria_usado float,
 memoria_disponivel float,
 data timestamp,
-primary key(id),
 foreign key (id) references usuarios(id)
 );
 
@@ -191,8 +189,7 @@ disco_C_livre float,
 disco_D_usado float,
 disco_D_livre float,
 data timestamp,
-primary key(id),
 foreign key (id) references usuarios(id)
-); 
+);
 ~~~
 
