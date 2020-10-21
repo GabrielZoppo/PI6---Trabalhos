@@ -149,31 +149,45 @@ while 1:
     time.sleep(600)
   ~~~
 
-* Código de criação da tabela Disco:
+* Código de criação das tabelas:
 ~~~SQL
+-- Criação tabela usuários
+create table usuarios(
+nome varchar(100),
+id int,
+primary key(id)
+);
+
+-- Criação tabela CPU
+create table cpu(
+id int,
+porcentagem float,
+frequencia float,
+data timestamp,
+primary key(id),
+foreign key (id) references usuarios(id)
+);
+
+-- Criação tabela memoria
+create table memoria(
+id int,
+memoria_usado float,
+memoria_disponivel float,
+data timestamp,
+primary key(id),
+foreign key (id) references usuarios(id)
+);
+
+-- Criação tabela disco
 create table disco(
+id int,
 disco_C_usado float,
 disco_C_livre float,
 disco_D_usado float,
 disco_D_livre float,
-data timestamp
-);
+data timestamp,
+primary key(id),
+foreign key (id) references usuarios(id)
+); 
 ~~~
 
-* Código de criação da tabela Memória:
-~~~SQL
-create table memoria(
-memoria_usado float,
-memoria_disponivel float,
-data timestamp
-);
-~~~
-
-* Código de criação da tabela CPU:
-~~~SQL
-create table cpu(
-porcentagem float,
-frequencia float,
-data timestamp
-);
-~~~
