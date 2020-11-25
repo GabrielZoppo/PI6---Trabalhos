@@ -449,7 +449,7 @@ app.exec()
     <x>0</x>
     <y>0</y>
     <width>571</width>
-    <height>306</height>
+    <height>337</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -471,8 +471,8 @@ app.exec()
   <widget class="QPushButton" name="pesquisarbot">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>80</y>
+     <x>450</x>
+     <y>100</y>
      <width>93</width>
      <height>28</height>
     </rect>
@@ -511,7 +511,7 @@ app.exec()
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>220</y>
+     <y>250</y>
      <width>95</width>
      <height>20</height>
     </rect>
@@ -524,7 +524,7 @@ app.exec()
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>260</y>
+     <y>290</y>
      <width>95</width>
      <height>20</height>
     </rect>
@@ -563,7 +563,7 @@ app.exec()
    <property name="geometry">
     <rect>
      <x>230</x>
-     <y>220</y>
+     <y>250</y>
      <width>95</width>
      <height>20</height>
     </rect>
@@ -576,7 +576,7 @@ app.exec()
    <property name="geometry">
     <rect>
      <x>230</x>
-     <y>260</y>
+     <y>290</y>
      <width>95</width>
      <height>20</height>
     </rect>
@@ -660,7 +660,7 @@ app.exec()
     </rect>
    </property>
    <property name="text">
-    <string>Atributo:</string>
+    <string>Atributo1::</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="AtributoL">
@@ -674,6 +674,32 @@ app.exec()
    </property>
    <property name="placeholderText">
     <string>Digite um atributo</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="AtributoL_2">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>210</y>
+     <width>161</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>Digite um atributo</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>210</y>
+     <width>55</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Atributo2:</string>
    </property>
   </widget>
  </widget>
