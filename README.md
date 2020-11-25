@@ -206,7 +206,7 @@ import psutil #biblioteca responsável pela coleta de dados do sistema como cpu,
 
 from pymysql.cursors import Cursor
 
-#declarando as informações necessárias para a conexão com o banco de dados
+#declarando as informações necessárias para a conexãocle com o banco de dados
 conexao = pymysql.connect(
   host = 'localhost',
   user = 'root',
@@ -215,68 +215,216 @@ conexao = pymysql.connect(
 )
 cursor = conexao.cursor()
 
+# tabela cpu
+atrituto = "porcentagem"
+atrituto = "frequencia"
+
+# tabela memoria
+atrituto = "memoria_usado"
+atrituto = "memoria_disponivel"
+
+
+
 #declarando a função que vai fazer os testes e selecionar o comando a ser executado
 def funcao_principal():
     # se o botão de cpu for marcado toda a tabela cpu vai ser buscada entre uma data expecifica
     if pesquisa.cpub.isChecked:
+        atributo1  = pesquisa.AtributoL.text()
+        atributo2 = pesquisa.AtributoL2.text()
         data1 = pesquisa.dataINI.text()
+        data1 = str(data1)
         data2 = pesquisa.dataFim.text()
-        cursor.execute("select * from projetobancodados.cpu where data between '%s' and '%s'" %(data1,data2))
+        data2 = str(data2)
+        
+        if atributo1 != "" and atributo2 != "":  
+            cursor.execute("select %s,%s,data from projetobancodados.cpu where data between '%s' and '%s'" %(atributo1, atributo2, data1, data2))
+        
+        if atributo1 == "" and atributo2 != "":
+            cursor.execute("select %s,data from projetobancodados.cpu where data between '%s' and '%s'" %(atributo2, data1, data2))
+
+        if atributo1 != "" and atributo2 == "":
+            cursor.execute("select %s,data from projetobancodados.cpu where data between '%s' and '%s'" %(atributo1, data1, data2))
+
+        if  atributo1 == "" and atributo2 == "":
+            cursor.execute("select * from projetobancodados.cpu where data between '%s' and '%s'" %(data1, data2))
 
     # se o botão de memoria for marcado toda a tabela memoria vai ser buscada entre uma data expecifica
-    elif pesquisa.memoriab.isChecked:
+    if pesquisa.memoriab.isChecked:
+        atributo1  = pesquisa.AtributoL.text()
+        atributo2 = pesquisa.AtributoL2.text()
         data1 = pesquisa.dataINI.text()
+        data1 = str(data1)
         data2 = pesquisa.dataFim.text()
-        cursor.execute("select * from projetobancodados.memoria where data between '%s' and '%s'" %(data1,data2))
+        data2 = str(data2)
+        
+        if atributo1 != "" and atributo2 != "":  
+            cursor.execute("select %s,%s,data from projetobancodados.memoria where data between '%s' and '%s'" %(atributo1, atributo2, data1, data2))
+        
+        if atributo1 == "" and atributo2 != "":
+            cursor.execute("select %s,data from projetobancodados.memoria where data between '%s' and '%s'" %(atributo2, data1, data2))
+
+        if atributo1 != "" and atributo2 == "":
+            cursor.execute("select %s,data from projetobancodados.memoria where data between '%s' and '%s'" %(atributo1, data1, data2))
+
+        if  atributo1 == "" and atributo2 == "":
+            cursor.execute("select * from projetobancodados.memoria where data between '%s' and '%s'" %(data1, data2))
+
 
     # se o botão de disco for marcado toda a tabela disco vai ser buscada entre uma data expecifica
-    elif pesquisa.discob.isChecked:
+    if pesquisa.discob.isChecked:
+        atributo1  = pesquisa.AtributoL.text()
+        atributo2 = pesquisa.AtributoL2.text()
         data1 = pesquisa.dataINI.text()
+        data1 = str(data1)
         data2 = pesquisa.dataFim.text()
-        cursor.execute("select * from projetobancodados.disco where data between '%s' and '%s'" %(data1,data2))
+        data2 = str(data2)
+        
+        if atributo1 != "" and atributo2 != "":  
+            cursor.execute("select %s,%s,data from projetobancodados.disco where data between '%s' and '%s'" %(atributo1, atributo2, data1, data2))
+        
+        if atributo1 == "" and atributo2 != "":
+            cursor.execute("select %s,data from projetobancodados.disco where data between '%s' and '%s'" %(atributo2, data1, data2))
+
+        if atributo1 != "" and atributo2 == "":
+            cursor.execute("select %s,data from projetobancodados.disco where data between '%s' and '%s'" %(atributo1, data1, data2))
+
+        if  atributo1 == "" and atributo2 == "":
+            cursor.execute("select * from projetobancodados.disco where data between '%s' and '%s'" %(data1, data2))
+
 
     # se o botão maximo for marcado um atributo vai ser lido para fazer a consulta escolhida
-    elif pesquisa.maximobot.isChecked:
-        atributo = pesquisa.atributoL.text()
+    if pesquisa.maximobot.isChecked:
+        atributo1  = pesquisa.AtributoL.text()
+        atributo2 = pesquisa.AtributoL2.text()
         if pesquisa.cpub.isChecked:
-            cursor.execute("SELECT MAX(%s) FROM projetobancodados.cpu" %(atributo))
-        elif pesquisa.memoriab.isChecked:
-            cursor.execute("SELECT MAX(%s) FROM projetobancodados.memoria" %(atributo))
-        elif pesquisa.discob.isChecked:
-            cursor.execute("SELECT MAX(%s) FROM projetobancodados.disco" %(atributo))
+            if atributo1 or atributo2 == "porcentagem" :
+                cursor.execute("SELECT MAX(porcentagem) FROM projetobancodados.cpu")
+            else:
+                cursor.execute("SELECT MAX(frequencia) FROM projetobancodados.cpu")
+
+        if pesquisa.memoriab.isChecked:
+            if atributo1 or atributo2 == "memoria_usado":
+                cursor.execute("SELECT MAX(memoria_usado) FROM projetobancodados.memoria")
+            else:
+                cursor.execute("SELECT MAX(memoria_disponivel) FROM projetobancodados.memoria")
+
+        if pesquisa.Discob.isChecked:
+            if atributo1 or atributo2 == "disco_C_usado ":
+                cursor.execute("SELECT MAX(disco_C_usado) FROM projetobancodados.disco")
+
+            if atributo1 or atributo2 == "disco_C_livre ":
+                cursor.execute("SELECT MAX(disco_C_livre) FROM projetobancodados.disco")
+
+            if atributo1 or atributo2 == "disco_D_usado ":
+                cursor.execute("SELECT MAX(disco_D_usado) FROM projetobancodados.disco")
+
+            else:
+                cursor.execute("SELECT MAX(disco_D_livre) FROM projetobancodados.disco")
 
      # se o botão minimo for marcado um atributo vai ser lido para fazer a consulta escolhida
-    elif pesquisa.minimobot.isChecked:
-        atributo = pesquisa.atributoL.text()
+    if pesquisa.minimobot.isChecked:
+        atributo1  = pesquisa.AtributoL.text()
+        atributo2 = pesquisa.AtributoL2.text()
         if pesquisa.cpub.isChecked:
-            cursor.execute("SELECT MIN(%s) FROM projetobancodados.cpu" %(atributo))
-        elif pesquisa.memoriab.isChecked:
-            cursor.execute("SELECT MIN(%s) FROM projetobancodados.memoria" %(atributo))
-        elif pesquisa.discob.isChecked:
-            cursor.execute("SELECT MIN(%s) FROM projetobancodados.disco" %(atributo))
+            if atributo1 or atributo2 == "porcentagem" :
+                cursor.execute("SELECT MIN(porcentagem) FROM projetobancodados.cpu")
+            else:
+                cursor.execute("SELECT MIN(frequencia) FROM projetobancodados.cpu")
+
+        if pesquisa.memoriab.isChecked:
+            if atributo1 or atributo2 == "memoria_usado":
+                cursor.execute("SELECT MIN(memoria_usado) FROM projetobancodados.memoria")
+            else:
+                cursor.execute("SELECT MIN(memoria_disponivel) FROM projetobancodados.memoria")
+
+        if pesquisa.Discob.isChecked:
+            if atributo1 or atributo2 == "disco_C_usado ":
+                cursor.execute("SELECT MIN(disco_C_usado) FROM projetobancodados.disco")
+
+            if atributo1 or atributo2 == "disco_C_livre ":
+                cursor.execute("SELECT MIN(disco_C_livre) FROM projetobancodados.disco")
+
+            if atributo1 or atributo2 == "disco_D_usado ":
+                cursor.execute("SELECT MIN(disco_D_usado) FROM projetobancodados.disco")
+
+            else:
+                cursor.execute("SELECT MIN(disco_D_livre) FROM projetobancodados.disco")
 
      # se o botão maior for marcado um atributo e um valor vai ser lido para fazer a consulta escolhida
-    elif pesquisa.Maiorbot.isChecked:
-        atributo = pesquisa.atributoL.text()
+    if pesquisa.Maiorbot.isChecked:
+        atributo1 = pesquisa.AtributoL.text()
+        atributo2 = pesquisa.AtributoL_2.text()
         valor = pesquisa.Valor.text()
         if pesquisa.cpub.isChecked:
-            cursor.execute("select * from projetobancodados.cpu where %s > %s" %(atributo,valor))
-        elif pesquisa.memoriab.isChecked:
-            cursor.execute("select * from projetobancodados.memoria where %s > %s" %(atributo,valor))
-        elif pesquisa.discob.isChecked:
-            cursor.execute("select * from projetobancodados.disco where %s > %s" %(atributo,valor))
+            if atributo1 != "" and atributo2 != "":  
+                cursor.execute("select %s from projetobancodados.cpu where %s > %s" %(atributo1,valor))    
+        
+            if atributo1 == "" and atributo2 != "":
+                cursor.execute("select %s from projetobancodados.cpu where %s > %s" %(atributo2,valor))
 
-    # se o botão maior for marcado um atributo e um valor vai ser lido para fazer a consulta escolhida
-    elif pesquisa.Menorbot.isChecked:
-        atributo = pesquisa.atributoL.text()
+            if atributo1 != "" and atributo2 == "":
+                cursor.execute("select %s from projetobancodados.cpu where %s > %s" %(atributo1,valor))
+
+
+        if pesquisa.memoriab.isChecked:
+            if atributo1 != "" and atributo2 != "":  
+                cursor.execute("select %s from projetobancodados.memoria where %s > %s" %(atributo1,valor))    
+        
+            if atributo1 == "" and atributo2 != "":
+                cursor.execute("select %s from projetobancodados.memoria where %s > %s" %(atributo2,valor))
+
+            if atributo1 != "" and atributo2 == "":
+                cursor.execute("select %s from projetobancodados.memoria where %s > %s" %(atributo1,valor))
+
+        if pesquisa.Discob.isChecked:
+            if atributo1 != "" and atributo2 != "":  
+                cursor.execute("select %s from projetobancodados.disco where %s > %s" %(atributo1,valor))    
+        
+            if atributo1 == "" and atributo2 != "":
+                cursor.execute("select %s from projetobancodados.disco where %s > %s" %(atributo2,valor))
+
+            if atributo1 != "" and atributo2 == "":
+                cursor.execute("select %s from projetobancodados.disco where %s > %s" %(atributo1,valor))
+
+    # se o botão menor for marcado um atributo e um valor vai ser lido para fazer a consulta escolhida
+    if pesquisa.Menorbot.isChecked:
+        atributo1 = pesquisa.AtributoL.text()
+        atributo2 = pesquisa.AtributoL_2.text()
         valor = pesquisa.Valor.text()
         if pesquisa.cpub.isChecked:
-            cursor.execute("select * from projetobancodados.cpu where %s < %s" %(atributo,valor))
-        elif pesquisa.memoriab.isChecked:
-            cursor.execute("select * from projetobancodados.memoria where %s < %s" %(atributo,valor))
-        elif pesquisa.discob.isChecked:
-            cursor.execute("select * from projetobancodados.disco where %s < %s" %(atributo,valor))
+            if atributo1 != "" and atributo2 != "":  
+                cursor.execute("select %s from projetobancodados.cpu where %s < %s" %(atributo1,valor))    
+        
+            if atributo1 == "" and atributo2 != "":
+                cursor.execute("select %s from projetobancodados.cpu where %s < %s" %(atributo2,valor))
 
+            if atributo1 != "" and atributo2 == "":
+                cursor.execute("select %s from projetobancodados.cpu where %s < %s" %(atributo1,valor))
+
+
+        if pesquisa.memoriab.isChecked:
+            if atributo1 != "" and atributo2 != "":  
+                cursor.execute("select %s from projetobancodados.memoria where %s < %s" %(atributo1,valor))    
+        
+            if atributo1 == "" and atributo2 != "":
+                cursor.execute("select %s from projetobancodados.memoria where %s < %s" %(atributo2,valor))
+
+            if atributo1 != "" and atributo2 == "":
+                cursor.execute("select %s from projetobancodados.memoria where %s < %s" %(atributo1,valor))
+
+        if pesquisa.Discob.isChecked:
+            if atributo1 != "" and atributo2 != "":  
+                cursor.execute("select %s from projetobancodados.disco where %s < %s" %(atributo1,valor))    
+        
+            if atributo1 == "" and atributo2 != "":
+                cursor.execute("select %s from projetobancodados.disco where %s < %s" %(atributo2,valor))
+
+            if atributo1 != "" and atributo2 == "":
+                cursor.execute("select %s from projetobancodados.disco where %s < %s" %(atributo1,valor))
+
+    # imprime o valor do resultado da pesquisa
+    for x in cursor:
+        print (x)
 
 # conexão com outro arquivo na qual possui a construção da interface
 app = QtWidgets.QApplication([])
@@ -285,7 +433,7 @@ pesquisa = uic.loadUi("telaPesquisa.ui")
 # chamando a função principal se o botão for apertado
 pesquisa.pesquisarbot.clicked.connect(funcao_principal)
 
-# imprime na tela o resultado
+# imprime a tela
 pesquisa.show()
 app.exec()
 ~~~
