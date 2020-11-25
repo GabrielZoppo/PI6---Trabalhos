@@ -193,3 +193,344 @@ foreign key (id) references usuarios(id)
 );
 ~~~
 
+* Código da tela funcional:
+
+~~~python
+from PyQt5 import uic, QtWidgets #biblioteca resposável pela criação da tela
+from typing import Any, Union
+import time
+from time import strftime, localtime #biblioteca responsável em colocar os dados da data e hora do sistema em timestamp para ser usado no banco
+import pymysql #biblioteca utilizada para comunicação entre python e mysql
+import psutil #biblioteca responsável pela coleta de dados do sistema como cpu,memoria e disco
+
+from pymysql.cursors import Cursor
+
+#declarando as informações necessárias para a conexão com o banco de dados
+conexao = pymysql.connect(
+  host = 'localhost',
+  user = 'root',
+  passwd='',
+  database = 'projetobancodados'
+)
+cursor = conexao.cursor()
+
+#declarando a função que vai fazer os testes e selecionar o comando a ser executado
+def funcao_principal():
+    # se o botão de cpu for marcado toda a tabela cpu vai ser buscada entre uma data expecifica
+    if pesquisa.cpub.isChecked:
+        data1 = pesquisa.dataINI.text()
+        data2 = pesquisa.dataFim.text()
+        cursor.execute("select * from projetobancodados.cpu where data between '%s' and '%s'" %(data1,data2))
+
+    # se o botão de memoria for marcado toda a tabela memoria vai ser buscada entre uma data expecifica
+    elif pesquisa.memoriab.isChecked:
+        data1 = pesquisa.dataINI.text()
+        data2 = pesquisa.dataFim.text()
+        cursor.execute("select * from projetobancodados.memoria where data between '%s' and '%s'" %(data1,data2))
+
+    # se o botão de disco for marcado toda a tabela disco vai ser buscada entre uma data expecifica
+    elif pesquisa.discob.isChecked:
+        data1 = pesquisa.dataINI.text()
+        data2 = pesquisa.dataFim.text()
+        cursor.execute("select * from projetobancodados.disco where data between '%s' and '%s'" %(data1,data2))
+
+    # se o botão maximo for marcado um atributo vai ser lido para fazer a consulta escolhida
+    elif pesquisa.maximobot.isChecked:
+        atributo = pesquisa.atributoL.text()
+        if pesquisa.cpub.isChecked:
+            cursor.execute("SELECT MAX(%s) FROM projetobancodados.cpu" %(atributo))
+        elif pesquisa.memoriab.isChecked:
+            cursor.execute("SELECT MAX(%s) FROM projetobancodados.memoria" %(atributo))
+        elif pesquisa.discob.isChecked:
+            cursor.execute("SELECT MAX(%s) FROM projetobancodados.disco" %(atributo))
+
+     # se o botão minimo for marcado um atributo vai ser lido para fazer a consulta escolhida
+    elif pesquisa.minimobot.isChecked:
+        atributo = pesquisa.atributoL.text()
+        if pesquisa.cpub.isChecked:
+            cursor.execute("SELECT MIN(%s) FROM projetobancodados.cpu" %(atributo))
+        elif pesquisa.memoriab.isChecked:
+            cursor.execute("SELECT MIN(%s) FROM projetobancodados.memoria" %(atributo))
+        elif pesquisa.discob.isChecked:
+            cursor.execute("SELECT MIN(%s) FROM projetobancodados.disco" %(atributo))
+
+     # se o botão maior for marcado um atributo e um valor vai ser lido para fazer a consulta escolhida
+    elif pesquisa.Maiorbot.isChecked:
+        atributo = pesquisa.atributoL.text()
+        valor = pesquisa.Valor.text()
+        if pesquisa.cpub.isChecked:
+            cursor.execute("select * from projetobancodados.cpu where %s > %s" %(atributo,valor))
+        elif pesquisa.memoriab.isChecked:
+            cursor.execute("select * from projetobancodados.memoria where %s > %s" %(atributo,valor))
+        elif pesquisa.discob.isChecked:
+            cursor.execute("select * from projetobancodados.disco where %s > %s" %(atributo,valor))
+
+    # se o botão maior for marcado um atributo e um valor vai ser lido para fazer a consulta escolhida
+    elif pesquisa.Menorbot.isChecked:
+        atributo = pesquisa.atributoL.text()
+        valor = pesquisa.Valor.text()
+        if pesquisa.cpub.isChecked:
+            cursor.execute("select * from projetobancodados.cpu where %s < %s" %(atributo,valor))
+        elif pesquisa.memoriab.isChecked:
+            cursor.execute("select * from projetobancodados.memoria where %s < %s" %(atributo,valor))
+        elif pesquisa.discob.isChecked:
+            cursor.execute("select * from projetobancodados.disco where %s < %s" %(atributo,valor))
+
+
+# conexão com outro arquivo na qual possui a construção da interface
+app = QtWidgets.QApplication([])
+pesquisa = uic.loadUi("telaPesquisa.ui")
+
+# chamando a função principal se o botão for apertado
+pesquisa.pesquisarbot.clicked.connect(funcao_principal)
+
+# imprime na tela o resultado
+pesquisa.show()
+app.exec()
+~~~
+
+* código da criação da tela
+~~~python
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>571</width>
+    <height>306</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>40</y>
+     <width>271</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Sistema de Buscas de dados&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pesquisarbot">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>80</y>
+     <width>93</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Pesquisar</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>90</y>
+     <width>91</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Data Inicial:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>120</y>
+     <width>91</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Data Final:</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="minimobot">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>220</y>
+     <width>95</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Minimo</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="maximobot">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>260</y>
+     <width>95</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Maximo</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>150</y>
+     <width>91</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Valor:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="Valor">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>150</y>
+     <width>161</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>Digite um valor </string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="Maiorbot">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>220</y>
+     <width>95</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Maior</string>
+   </property>
+  </widget>
+  <widget class="QRadioButton" name="Menorbot">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>260</y>
+     <width>95</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Menor</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="dataINI">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>90</y>
+     <width>161</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>AAAA-MM-DD</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="dataFim">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>120</y>
+     <width>161</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>AAAA-MM-DD</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="cpub">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>90</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>CPU</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="memoriab">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>120</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Memória</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="Discob">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>150</y>
+     <width>81</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Disco</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>180</y>
+     <width>55</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Atributo:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="AtributoL">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>180</y>
+     <width>161</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>Digite um atributo</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
+
+~~~
+
