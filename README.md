@@ -193,6 +193,7 @@ foreign key (id) references usuarios(id)
 );
 ~~~
 
+### Código da tela:
 * Código da tela funcional:
 
 ~~~python
@@ -290,7 +291,7 @@ app.exec()
 ~~~
 
 * código da criação da tela
-~~~python
+~~~ui
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>Dialog</class>
