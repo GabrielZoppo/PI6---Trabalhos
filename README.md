@@ -676,7 +676,7 @@ app.exec()
     <string>Digite um atributo</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="AtributoL_2">
+  <widget class="QLineEdit" name="AtributoL2">
    <property name="geometry">
     <rect>
      <x>170</x>
