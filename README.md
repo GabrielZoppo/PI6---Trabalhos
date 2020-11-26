@@ -708,4 +708,107 @@ app.exec()
 </ui>
 
 ~~~
+* Código para botão adicionar
+~~~python
+from PyQt5 import uic, QtWidgets #biblioteca resposável pela criação da tela
+from typing import Any, Union
+import time
+from time import strftime, localtime #biblioteca responsável em colocar os dados da data e hora do sistema em timestamp para ser usado no banco
+import pymysql #biblioteca utilizada para comunicação entre python e mysql
+import psutil #biblioteca responsável pela coleta de dados do sistema como cpu,memoria e disco
 
+from pymysql.cursors import Cursor
+
+#declarando as informações necessárias para a conexão com o banco de dados
+conexao = pymysql.connect(
+  host = 'localhost',
+  user = 'root',
+  passwd='',
+  database = 'projeto'
+)
+cursor = conexao.cursor()
+
+def adicionar():
+    #Leitura de CPU:
+    cpu_percent = psutil.cpu_percent(interval=1)
+    cpu_freq = psutil.cpu_freq(percpu=False)
+
+    #leitura de disco:
+    discoC = psutil.disk_usage('C://')
+    discoD = psutil.disk_usage('D://')
+
+    #leitura de memória:
+    mem = psutil.virtual_memory()
+
+    #leitura de data e hora:
+    datahora = strftime("%Y-%m-%d %H:%M:%S", localtime())
+
+    #definindo usuário
+    id = 1
+
+    #tratamento dos dados para as devidas medidas:
+    mem_used      = float(round(mem.used/1000000000,2))
+    mem_available = float(round(mem.available/1000000000,2))
+    discoC_used   = float(round(discoC.used/1000000000,2))
+    discoC_free   = float(round(discoC.free/1000000000,2))
+    discoD_used   = float(round(discoD.used/1000000000,2))
+    discoD_free   = float(round(discoD.free/1000000000,2))
+    cpu_p = float(cpu_percent)
+    cpu_f = float(round(cpu_freq.current,2))
+
+
+    # inserção dos dados no Banco de Dados
+    inserecpu = "insert into cpu(id, porcentagem, frequencia, data)values(%s, %s, %s, %s)"
+    inseremem = "insert into memoria(id, memoria_usado, memoria_disponivel, data)values(%s, %s, %s, %s)"
+    inseredis = "insert into disco(id, disco_C_usado, disco_C_livre, disco_D_usado, disco_D_livre, data)values(%s, %s, %s, %s,%s, %s)"
+    valorcpu = (id, cpu_p, cpu_f, datahora)
+    valormem = (id, mem_used, mem_available, datahora)
+    valordis = (id, discoC_used, discoC_free, discoD_used, discoD_free, datahora)
+    if pesquisa.cpub.isChecked:
+        cursor.execute(inserecpu, valorcpu)
+
+    if pesquisa.memoriab.isChecked:
+        cursor.execute(inseremem, valormem)
+
+    if pesquisa.Discob.isChecked:
+        cursor.execute(inseredis, valordis)
+
+    if pesquisa.cpub.isChecked and pesquisa.memoriab.isChecked:
+         cursor.execute(inserecpu, valorcpu)
+         cursor.execute(inseremem, valormem)
+
+    if pesquisa.cpub.isChecked and pesquisa.Discob.isChecked:
+         cursor.execute(inserecpu, valorcpu)
+         cursor.execute(inseredis, valordis)
+
+    if pesquisa.memoriab.isChecked and pesquisa.Discob.isChecked:
+         cursor.execute(inseremem, valormem)
+         cursor.execute(inseredis, valordis)
+    else:
+        cursor.execute(inserecpu, valorcpu)
+        cursor.execute(inseremem, valormem)
+        cursor.execute(inseredis, valordis)
+conexao.commit()
+
+
+
+
+#declarando a função que vai fazer os testes e selecionar o comando a ser executado
+
+
+# conexão com outro arquivo na qual possui a construção da interface
+app = QtWidgets.QApplication([])
+pesquisa = uic.loadUi("telaPesquisa.ui")
+
+
+
+# chamando a função principal se o botão for apertado
+pesquisa.adicionarbot.clicked.connect(adicionar)
+
+# imprime a tela
+pesquisa.show()
+app.exec()
+
+
+
+~~~
