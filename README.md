@@ -788,7 +788,7 @@ def adicionar():
         cursor.execute(inserecpu, valorcpu)
         cursor.execute(inseremem, valormem)
         cursor.execute(inseredis, valordis)
-conexao.commit()
+    conexao.commit()
 
 
 
