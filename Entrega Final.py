@@ -85,24 +85,6 @@ def adicionar():
         cursor.execute(inseredis, valordis)
     conexao.commit()
 #declarando a função que vai fazer os testes e selecionar o comando a ser executado
-def funcao_principal():
-    # se o botão de cpu for marcado toda a tabela cpu vai ser buscada entre uma data expecifica
-    if pesquisa.cpub.isChecked:
-        atributo1  = pesquisa.AtributoL.text()
-        atributo2 = pesquisa.AtributoL2.text()
-        data1 = pesquisa.dataINI.text()
-        data1 = str(data1)
-        data2 = pesquisa.dataFim.text()
-        data2 = str(data2)
-        
-        if atributo1 == "" and atributo2 != "":
-            cursor.execute("select %s,data from projetobancodados.cpu where data between '%s' and '%s'" %(atributo2, data1, data2))
-
-        if atributo1 != "" and atributo2 == "":
-            cursor.execute("select %s,data from projetobancodados.cpu where data between '%s' and '%s'" %(atributo1, data1, data2))
-        visao()
-        
-#declarando a função que vai fazer os testes e selecionar o comando a ser executado
 def Pesquisa():
     # se o botão de cpu for marcado toda a tabela cpu vai ser buscada entre uma data expecifica
     if pesquisa.cpub.isChecked:
@@ -528,7 +510,7 @@ pesquisa = uic.loadUi("telaPesquisa.ui")
 # chamando a função principal se o botão for apertado
 pesquisa.pesquisarbot.clicked.connect(Pesquisa)
 pesquisa.adicionarbot.clicked.connect(adicionar)
-#pesquisa.graficobot.clicked.connect(relatorio)
+pesquisa.graficobot.clicked.connect(relatorio)
 
 # imprime a tela
 pesquisa.show()
